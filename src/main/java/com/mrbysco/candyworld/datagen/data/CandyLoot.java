@@ -5,8 +5,8 @@ import com.mojang.datafixers.util.Pair;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -52,7 +52,7 @@ public class CandyLoot extends LootTableProvider {
 		);
 	}
 
-	private static class FarmingBlocks extends BlockLoot {
+	private static class FarmingBlocks extends VanillaBlockLoot {
 		private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS));
 		private static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
 		public static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
@@ -60,30 +60,18 @@ public class CandyLoot extends LootTableProvider {
 		private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
 		@Override
-		protected void addTables() {
+		protected void generate() {
 			this.dropSelf(CHOCOLATE_SAPLING.get());
 			this.dropSelf(WAFER_STICK_BLOCK.get());
-			this.add(MILK_CHOCOLATE_LEAVES.get(), (block) -> {
-				return createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), MILK_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES);
-			});
-			this.add(WHITE_CHOCOLATE_LEAVES.get(), (block) -> {
-				return createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), WHITE_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES);
-			});
-			this.add(DARK_CHOCOLATE_LEAVES.get(), (block) -> {
-				return createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), DARK_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES);
-			});
+			this.add(MILK_CHOCOLATE_LEAVES.get(), (block) -> createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), MILK_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(WHITE_CHOCOLATE_LEAVES.get(), (block) -> createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), WHITE_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(DARK_CHOCOLATE_LEAVES.get(), (block) -> createChocolateLeavesDrops(block, CHOCOLATE_SAPLING.get(), DARK_CHOCOLATE_BAR.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 			this.dropOther(MILK_CHOCOLATE_BAR_BLOCK.get(), MILK_CHOCOLATE_BAR.get());
 			this.dropOther(WHITE_CHOCOLATE_BAR_BLOCK.get(), WHITE_CHOCOLATE_BAR.get());
 			this.dropOther(DARK_CHOCOLATE_BAR_BLOCK.get(), DARK_CHOCOLATE_BAR.get());
-			this.add(MILK_CHOCOLATE_MUSHROOM.get(), (block) -> {
-				return createSilkAndChanceDrop(block, MILK_CHOCOLATE_BAR.get(), 0, 1, 0.125F);
-			});
-			this.add(WHITE_CHOCOLATE_MUSHROOM.get(), (block) -> {
-				return createSilkAndChanceDrop(block, WHITE_CHOCOLATE_BAR.get(), 0, 1, 0.125F);
-			});
-			this.add(DARK_CHOCOLATE_MUSHROOM.get(), (block) -> {
-				return createSilkAndChanceDrop(block, DARK_CHOCOLATE_BAR.get(), 0, 1, 0.125F);
-			});
+			this.add(MILK_CHOCOLATE_MUSHROOM.get(), (block) -> createSilkAndChanceDrop(block, MILK_CHOCOLATE_BAR.get(), 0, 1, 0.125F));
+			this.add(WHITE_CHOCOLATE_MUSHROOM.get(), (block) -> createSilkAndChanceDrop(block, WHITE_CHOCOLATE_BAR.get(), 0, 1, 0.125F));
+			this.add(DARK_CHOCOLATE_MUSHROOM.get(), (block) -> createSilkAndChanceDrop(block, DARK_CHOCOLATE_BAR.get(), 0, 1, 0.125F));
 			this.dropSelf(MILK_CHOCOLATE_BLOCK.get());
 			this.dropSelf(WHITE_CHOCOLATE_BLOCK.get());
 			this.dropSelf(DARK_CHOCOLATE_BLOCK.get());
@@ -94,15 +82,9 @@ public class CandyLoot extends LootTableProvider {
 			this.dropSelf(WHITE_CHOCOLATE_WORKBENCH.get());
 			this.dropSelf(DARK_CHOCOLATE_WORKBENCH.get());
 			this.dropSelf(COTTON_CANDY_SAPLING.get());
-			this.add(COTTON_CANDY_LEAVES.get(), (block) -> {
-				return createChocolateLeavesDrops(block, COTTON_CANDY_SAPLING.get(), COTTON_CANDY.get(), NORMAL_LEAVES_SAPLING_CHANCES);
-			});
-			this.add(COTTON_CANDY_PLANT.get(), (block) -> {
-				return createShearsDispatchTable(block, LootItem.lootTableItem(COTTON_CANDY.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))));
-			});
-			this.add(COTTON_CANDY_BUSH.get(), (block) -> {
-				return createSilkAndChanceDrop(block, COTTON_CANDY.get(), 0, 2, 0.125F);
-			});
+			this.add(COTTON_CANDY_LEAVES.get(), (block) -> createChocolateLeavesDrops(block, COTTON_CANDY_SAPLING.get(), COTTON_CANDY.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+			this.add(COTTON_CANDY_PLANT.get(), (block) -> createShearsDispatchTable(block, LootItem.lootTableItem(COTTON_CANDY.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
+			this.add(COTTON_CANDY_BUSH.get(), (block) -> createSilkAndChanceDrop(block, COTTON_CANDY.get(), 0, 2, 0.125F));
 			this.dropSelf(WHITE_CANDY_CANE_BLOCK.get());
 			this.dropSelf(RED_CANDY_CANE_BLOCK.get());
 			this.dropSelf(GREEN_CANDY_CANE_BLOCK.get());
@@ -117,34 +99,18 @@ public class CandyLoot extends LootTableProvider {
 			this.dropSelf(WHITE_GREEN_CANDY_CANE_WORKBENCH.get());
 			this.dropSelf(RED_GREEN_CANDY_CANE_WORKBENCH.get());
 
-			this.add(CRYSTALLIZED_SUGAR.get(), (block) -> {
-				return createSilkTouchDispatchTable(block, LootItem.lootTableItem(SUGAR_CRYSTAL.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))));
-			});
+			this.add(CRYSTALLIZED_SUGAR.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(SUGAR_CRYSTAL.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4)))));
 			this.dropSelf(LICORICE_BLOCK.get());
-			this.add(SUGAR_SAND.get(), (block) -> {
-				return createSilkTouchDispatchTable(block, LootItem.lootTableItem(Items.SUGAR).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))));
-			});
-			this.add(CANDY_GRASS_BLOCK.get(), (block) -> {
-				return createSingleItemTableWithSilkTouch(block, MILK_BROWNIE_BLOCK.get());
-			});
+			this.add(SUGAR_SAND.get(), (block) -> createSilkTouchDispatchTable(block, LootItem.lootTableItem(Items.SUGAR).apply(SetItemCountFunction.setCount(ConstantValue.exactly(4)))));
+			this.add(CANDY_GRASS_BLOCK.get(), (block) -> createSingleItemTableWithSilkTouch(block, MILK_BROWNIE_BLOCK.get()));
 			this.dropSelf(MILK_BROWNIE_BLOCK.get());
-			this.add(CHOCOLATE_COVERED_WHITE_BROWNIE.get(), (block) -> {
-				return createSingleItemTableWithSilkTouch(block, WHITE_BROWNIE_BLOCK.get());
-			});
+			this.add(CHOCOLATE_COVERED_WHITE_BROWNIE.get(), (block) -> createSingleItemTableWithSilkTouch(block, WHITE_BROWNIE_BLOCK.get()));
 			this.dropSelf(WHITE_BROWNIE_BLOCK.get());
-			this.add(DARK_CANDY_GRASS.get(), (block) -> {
-				return createSingleItemTableWithSilkTouch(block, DARK_BROWNIE_BLOCK.get());
-			});
+			this.add(DARK_CANDY_GRASS.get(), (block) -> createSingleItemTableWithSilkTouch(block, DARK_BROWNIE_BLOCK.get()));
 			this.dropSelf(DARK_BROWNIE_BLOCK.get());
-			this.add(CRYSTALLIZED_SUGAR_COOKIE_ORE.get(), (block) -> {
-				return createOreDrop(block, Items.COOKIE);
-			});
-			this.add(COOKIE_ORE.get(), (block) -> {
-				return createOreDrop(block, Items.COOKIE);
-			});
-			this.add(TELEPORTER_ORE.get(), (block) -> {
-				return createOreDrop(block, TELEPORTER.get());
-			});
+			this.add(CRYSTALLIZED_SUGAR_COOKIE_ORE.get(), (block) -> createOreDrop(block, Items.COOKIE));
+			this.add(COOKIE_ORE.get(), (block) -> createOreDrop(block, Items.COOKIE));
+			this.add(TELEPORTER_ORE.get(), (block) -> createOreDrop(block, TELEPORTER.get()));
 
 			this.dropSelf(RED_GUMMY_BLOCK.get());
 			this.dropSelf(ORANGE_GUMMY_BLOCK.get());
@@ -171,20 +137,20 @@ public class CandyLoot extends LootTableProvider {
 			this.dropSelf(GREEN_GUMMY_WORKBENCH.get());
 		}
 
-		protected static LootTable.Builder createChocolateLeavesDrops(Block block, Block sapling, Item chocolate, float... chances) {
+		protected LootTable.Builder createChocolateLeavesDrops(Block block, Block sapling, Item chocolate, float... chances) {
 			return createLeavesDrops(block, sapling, chances).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
 					.when(HAS_NO_SHEARS_OR_SILK_TOUCH).add(applyExplosionCondition(block, LootItem.lootTableItem(chocolate))
 							.when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F))));
 		}
 
-		protected static LootTable.Builder createChanceDrop(Block block, Item drop, float min, float max, float chance) {
+		protected LootTable.Builder createChanceDrop(Block block, Item drop, float min, float max, float chance) {
 			return LootTable.lootTable()
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
 							.add(applyExplosionDecay(block, LootItem.lootTableItem(drop)
 									.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).when(LootItemRandomChanceCondition.randomChance(chance)))));
 		}
 
-		protected static LootTable.Builder createSilkAndChanceDrop(Block block, Item drop, float min, float max, float chance) {
+		protected LootTable.Builder createSilkAndChanceDrop(Block block, Item drop, float min, float max, float chance) {
 			return createShearsDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(drop)
 					.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).when(LootItemRandomChanceCondition.randomChance(chance))));
 		}
@@ -195,7 +161,7 @@ public class CandyLoot extends LootTableProvider {
 
 		@Override
 		protected Iterable<Block> getKnownBlocks() {
-			return (Iterable<Block>) ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+			return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
 		}
 	}
 

@@ -7,9 +7,9 @@ import com.mrbysco.candyworld.datagen.data.CandyLoot;
 import com.mrbysco.candyworld.datagen.data.CandyRecipes;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModDatagen {
@@ -19,13 +19,13 @@ public class ModDatagen {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		if (event.includeServer()) {
-			generator.addProvider(new CandyLoot(generator));
-			generator.addProvider(new CandyRecipes(generator));
+			generator.addProvider(true,new CandyLoot(generator));
+			generator.addProvider(true,new CandyRecipes(generator));
 		}
 		if (event.includeClient()) {
-			generator.addProvider(new CandyStateProvider(generator, helper));
-			generator.addProvider(new CandyItemModelProvider(generator, helper));
-			generator.addProvider(new CandyLanguageProvider(generator));
+			generator.addProvider(true,new CandyStateProvider(generator, helper));
+			generator.addProvider(true,new CandyItemModelProvider(generator, helper));
+			generator.addProvider(true,new CandyLanguageProvider(generator));
 		}
 	}
 }

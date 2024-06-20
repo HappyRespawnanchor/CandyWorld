@@ -11,15 +11,11 @@ import com.mrbysco.candyworld.block.workbench.GummyWorkbenchBlock;
 import com.mrbysco.candyworld.registry.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
+import net.minecraftforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -78,7 +74,7 @@ public class CandyItemModelProvider extends ItemModelProvider {
 
 	private void generateBucket(RegistryObject<Item> registryObject, RegistryObject<FlowingFluid> fluidRegistryObject) {
 		withExistingParent(registryObject.getId().getPath(), new ResourceLocation("forge", "item/bucket"))
-				.customLoader(DynamicBucketModelBuilder::begin)
+				.customLoader(DynamicFluidContainerModelBuilder::begin)
 				.fluid(fluidRegistryObject.get());
 	}
 }
