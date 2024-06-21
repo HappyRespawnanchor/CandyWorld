@@ -1,9 +1,9 @@
 package com.mrbysco.candyworld.enums;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 public enum EnumGummy implements StringRepresentable {
 
@@ -50,7 +50,7 @@ public enum EnumGummy implements StringRepresentable {
 	}
 
 	@Nonnull
-	public static EnumGummy random(Random rand) {
+	public static EnumGummy random(RandomSource rand) {
 		return byMetadata(rand.nextInt(META_LOOKUP.length));
 	}
 
