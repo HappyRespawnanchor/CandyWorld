@@ -1,6 +1,6 @@
-# Candy World - ReCaramelized - Reborn#
+# Candy World - ReCaramelized - Reborn
 Candy world - ReCaramelized - Reborn is a continuation of [Candy World - ReCaramelized](https://github.com/Mrbysco/CandyWorld) by [Mrbysco](https://github.com/Mrbysco)
-> Candy world - ReCaramelized is a a continuation of [Candy World](https://github.com/ochotonida/candymod) by [ochotonida](https://github.com/ochotonida)
+> Candy world - ReCaramelized is a continuation of [Candy World](https://github.com/ochotonida/candymod) by [ochotonida](https://github.com/ochotonida)
 
 ## About ##
 Candy World is a mod that adds a bunch of candy-themed biomes to a custom dimension. More information can be found [here](https://example.com)
