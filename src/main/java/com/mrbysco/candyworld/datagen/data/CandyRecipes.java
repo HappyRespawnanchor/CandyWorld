@@ -21,7 +21,7 @@ import static com.mrbysco.candyworld.registry.ModItems.*;
 
 public class CandyRecipes extends RecipeProvider {
 	public CandyRecipes(DataGenerator gen) {
-		super(gen);
+		super(gen.getPackOutput());
 	}
 
 	@Override

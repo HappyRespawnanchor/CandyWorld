@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CandyLanguageProvider extends LanguageProvider {
 	public CandyLanguageProvider(DataGenerator gen) {
-		super(gen, CandyWorld.MOD_ID, "en_us");
+		super(gen.getPackOutput(), CandyWorld.MOD_ID, "en_us");
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CandyItemModelProvider extends ItemModelProvider {
 	public CandyItemModelProvider(DataGenerator gen, ExistingFileHelper helper) {
-		super(gen, CandyWorld.MOD_ID, helper);
+		super(gen.getPackOutput(), CandyWorld.MOD_ID, helper);
 	}
 
 	@Override

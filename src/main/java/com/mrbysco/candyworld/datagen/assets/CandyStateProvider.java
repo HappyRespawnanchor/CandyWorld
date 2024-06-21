@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CandyStateProvider extends BlockStateProvider {
 	public CandyStateProvider(DataGenerator gen, ExistingFileHelper helper) {
-		super(gen, CandyWorld.MOD_ID, helper);
+		super(gen.getPackOutput(), CandyWorld.MOD_ID, helper);
 	}
 
 	@Override
