@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -13,13 +12,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.IPlantable;
 
-import javax.annotation.Nonnull;
-
 public class ChocolateMushroomBlock extends BushBlock implements IForgeShearable, IPlantable {
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
     public ChocolateMushroomBlock(Properties properties) {
-        super(properties);
+        super(properties.offsetType(OffsetType.XYZ));
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
@@ -51,9 +48,9 @@ public class ChocolateMushroomBlock extends BushBlock implements IForgeShearable
 //        return random.nextInt(15) == 0 ? 1 : 0;
 //    }
 
-    @Nonnull
-    @Override
-    public BlockBehaviour.OffsetType getOffsetType() {
-        return BlockBehaviour.OffsetType.XYZ;
-    }
+//    @Nonnull
+//    @Override
+//    public BlockBehaviour.OffsetType getOffsetType() {
+//        return BlockBehaviour.OffsetType.XYZ;
+//    }
 }

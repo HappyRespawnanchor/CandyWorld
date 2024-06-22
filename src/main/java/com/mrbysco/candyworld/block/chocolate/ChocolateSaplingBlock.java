@@ -5,14 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 
 public class ChocolateSaplingBlock extends SaplingBlock {
 
     public ChocolateSaplingBlock(AbstractTreeGrower treeIn, Properties properties) {
-        super(treeIn, properties);
+        super(treeIn, properties.offsetType(OffsetType.XYZ));
         this.registerDefaultState(this.stateDefinition.any().setValue(STAGE, Integer.valueOf(0)));
     }
 
@@ -29,8 +28,8 @@ public class ChocolateSaplingBlock extends SaplingBlock {
                 super.mayPlaceOn(state, worldIn, pos);
     }
 
-    @Override
-    public OffsetType getOffsetType() {
-        return BlockBehaviour.OffsetType.XZ;
-    }
+//    @Override
+//    public OffsetType getOffsetType() {
+//        return BlockBehaviour.OffsetType.XZ;
+//    }
 }
