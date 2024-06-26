@@ -8,20 +8,18 @@ import com.mrbysco.candyworld.registry.ModBiomes;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import com.mrbysco.candyworld.registry.ModEntities;
 import com.mrbysco.candyworld.registry.ModItems;
-import com.mrbysco.candyworld.world.CandyTrunkPlacers;
-import com.mrbysco.candyworld.world.ModConfiguredFeatures;
-import com.mrbysco.candyworld.world.ModFeatures;
-import com.mrbysco.candyworld.world.ModFoliagePlacer;
-import com.mrbysco.candyworld.world.ModPlacedFeatures;
-import com.mrbysco.candyworld.world.ModSurfaceRules;
-import com.mrbysco.candyworld.world.WorldgenHandler;
+import com.mrbysco.candyworld.world.*;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -38,13 +36,14 @@ public class CandyWorld {
 		eventBus.register(CandyConfig.class);
 
 		eventBus.addListener(this::setup);
-
-		ModFluids.registerFluids();
+		ModFluids.register(eventBus);
+		//ModFluids.registerFluids();
 		ModLootTables.init();
 
 		ModItems.ITEMS.register(eventBus);
 		ModBlocks.BLOCKS.register(eventBus);
-		ModFluids.FLUIDS.register(eventBus);
+		ModFeatures.FEATURES.register(eventBus);
+		//ModFluids.FLUIDS.register(eventBus);
 		ModEntities.ENTITIES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
 		ModConfiguredFeatures.CONFIGURED_FEATURES.register(eventBus);
@@ -75,5 +74,13 @@ public class CandyWorld {
 		ModBiomes.addBiomeTypes();
 		ModBiomes.addBiomes();
 //		ModDimension.registerStuff();
+	}
+	@Mod.EventBusSubscriber(modid = CandyWorld.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	public static class ClientModEvents{
+		@SubscribeEvent
+		public static void onClientSetup(FMLClientSetupEvent event) {
+			ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAP_WATER_SOURCE.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAP_WATER_FLOWING.get(), RenderType.translucent());
+		}
 	}
 }

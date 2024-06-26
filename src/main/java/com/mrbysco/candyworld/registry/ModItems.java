@@ -88,9 +88,12 @@ public final class ModItems {
 	public static final RegistryObject<Item> GUMMY_BEAR_SPAWN_EGG = ITEMS.register("gummy_bear_spawn_egg", () ->
 			new ForgeSpawnEggItem(() -> ModEntities.GUMMY_BEAR.get(), 0x00ff00, 0x33bb33, new Item.Properties()/* .tab(ModGroups.ITEMS) */));
 
-	public static final RegistryObject<Item> LIQUID_CHOCOLATE_BUCKET = ITEMS.register("liquid_chocolate_bucket", () ->
-			new BucketItem(() -> ModFluids.LIQUID_CHOCOLATE_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
-	public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
-			new BucketItem(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
-
+//	public static final RegistryObject<Item> LIQUID_CHOCOLATE_BUCKET = ITEMS.register("liquid_chocolate_bucket", () ->
+//			new BucketItem(() -> ModFluids.LIQUID_CHOCOLATE_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
+//	public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
+//			new BucketItem(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
+public static final RegistryObject<Item> SOAP_WATER_BUCKET = ITEMS.register("liquid_chocolate_bucket", () ->
+		new BucketItem(ModFluids.SOAP_WATER_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
+//	public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
+//			new BucketItem(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
 }

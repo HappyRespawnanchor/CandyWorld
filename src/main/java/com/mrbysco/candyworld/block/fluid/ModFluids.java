@@ -3,17 +3,15 @@ package com.mrbysco.candyworld.block.fluid;
 import com.mrbysco.candyworld.CandyWorld;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import com.mrbysco.candyworld.registry.ModItems;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+/*
 public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, CandyWorld.MOD_ID);
 
@@ -53,5 +51,24 @@ public class ModFluids {
         LIQUID_CHOCOLATE_FLOWING = FLUIDS.register("fluid_chocolate_flowing", () -> new ForgeFlowingFluid.Flowing(FLUID_CHOCOLATE_PROPERTIES));
         LIQUID_CANDY_SOURCE = FLUIDS.register("fluid_candy_source", () -> new ForgeFlowingFluid.Source(FLUID_CANDY_PROPERTIES));
         LIQUID_CANDY_FLOWING = FLUIDS.register("fluid_candy_flowing", () -> new ForgeFlowingFluid.Flowing(FLUID_CANDY_PROPERTIES));
+    }
+}
+*/
+public class ModFluids {
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, CandyWorld.MOD_ID);
+
+    public static final RegistryObject<FlowingFluid> SOAP_WATER_SOURCE = FLUIDS.register("soap_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.SOAP_WATER_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> SOAP_WATER_FLOWING = FLUIDS.register("flowing_soap_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.SOAP_WATER_PROPERTIES));
+
+    public static final ForgeFlowingFluid.Properties SOAP_WATER_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.LIQUID_CHOCOLATE_TYPE, SOAP_WATER_SOURCE, SOAP_WATER_FLOWING)
+            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.SOAP_WATER_BLOCK)
+            .bucket(ModItems.SOAP_WATER_BUCKET);
+    
+
+    public static void register(IEventBus eventBus) {
+        FLUIDS.register(eventBus);
     }
 }
