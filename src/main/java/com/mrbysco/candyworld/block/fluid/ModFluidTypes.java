@@ -13,7 +13,7 @@ import org.joml.Vector3f;
 public class ModFluidTypes {
     public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
     public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
-    public static final ResourceLocation LIQUID_CHOCOLATE_OVERLAY_RL = new ResourceLocation("msic/in_soap_water");
+    public static final ResourceLocation LIQUID_CHOCOLATE_OVERLAY_RL = new ResourceLocation("msic/in_liquid_chocolate");
 
     public static final DeferredRegister<FluidType> FLUID_TYPES =
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, CandyWorld.MOD_ID);

@@ -132,7 +132,7 @@ public class CandyLanguageProvider extends LanguageProvider {
 		addItem(ModItems.COTTON_CANDY_AXE, "Cotton Candy Axe");
 		addItem(ModItems.COTTON_CANDY_SHOVEL, "Cotton Candy Shovel");
 		addItem(ModItems.COTTON_CANDY_SWORD, "Cotton Candy Sword");
-		addItem(ModItems.SOAP_WATER_BUCKET, "Liquid Chocolate Bucket");
+		addItem(ModItems.LIQUID_CANDY_BLOCK_BUCKET, "Liquid Chocolate Bucket");
 		addItem(ModItems.LIQUID_CANDY_BUCKET, "Liquid Candy Bucket");
 		addItem(ModItems.COTTON_CANDY_SHEEP_SPAWN_EGG, "Cotton Candy Sheep Spawn Egg");
 		addItem(ModItems.EASTER_CHICKEN_SPAWN_EGG, "Easter Chicken Spawn Egg");

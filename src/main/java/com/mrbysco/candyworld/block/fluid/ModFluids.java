@@ -57,15 +57,17 @@ public class ModFluids {
 public class ModFluids {
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, CandyWorld.MOD_ID);
 
-    public static final RegistryObject<FlowingFluid> SOAP_WATER_SOURCE = FLUIDS.register("soap_water_fluid",
-            () -> new ForgeFlowingFluid.Source(ModFluids.SOAP_WATER_PROPERTIES));
-    public static final RegistryObject<FlowingFluid> SOAP_WATER_FLOWING = FLUIDS.register("flowing_soap_water",
-            () -> new ForgeFlowingFluid.Flowing(ModFluids.SOAP_WATER_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> LIQUID_CANDY_BLOCK_SOURCE = FLUIDS.register("soap_water_fluid",
+            () -> new ForgeFlowingFluid.Source(ModFluids.LIQUID_CANDY_BLOCK_PROPERTIES));
+    public static final RegistryObject<FlowingFluid> LIQUID_CANDY_BLOCK_FLOWING = FLUIDS.register("flowing_soap_water",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.LIQUID_CANDY_BLOCK_PROPERTIES));
 
-    public static final ForgeFlowingFluid.Properties SOAP_WATER_PROPERTIES = new ForgeFlowingFluid.Properties(
-            ModFluidTypes.LIQUID_CHOCOLATE_TYPE, SOAP_WATER_SOURCE, SOAP_WATER_FLOWING)
-            .slopeFindDistance(2).levelDecreasePerBlock(2).block(ModBlocks.SOAP_WATER_BLOCK)
-            .bucket(ModItems.SOAP_WATER_BUCKET);
+    public static final ForgeFlowingFluid.Properties LIQUID_CANDY_BLOCK_PROPERTIES = new ForgeFlowingFluid.Properties(
+            ModFluidTypes.LIQUID_CHOCOLATE_TYPE, LIQUID_CANDY_BLOCK_SOURCE, LIQUID_CANDY_BLOCK_FLOWING)
+            .slopeFindDistance(2)
+            .levelDecreasePerBlock(2)
+            .block(ModBlocks.LIQUID_CANDY_BLOCK)
+            .bucket(ModItems.LIQUID_CANDY_BLOCK_BUCKET);
     
 
     public static void register(IEventBus eventBus) {

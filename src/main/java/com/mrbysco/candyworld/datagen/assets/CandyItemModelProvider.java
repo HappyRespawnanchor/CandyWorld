@@ -69,7 +69,7 @@ public class CandyItemModelProvider extends ItemModelProvider {
 			}
 		}
 		generateBucket(ModItems.LIQUID_CANDY_BUCKET, ModFluids.LIQUID_CANDY_SOURCE);
-		generateBucket(ModItems.SOAP_WATER_BUCKET, ModFluids.LIQUID_CANDY_SOURCE);
+		generateBucket(ModItems.LIQUID_CANDY_BLOCK_BUCKET, ModFluids.LIQUID_CANDY_SOURCE);
 	}
 
 	private void generateBucket(RegistryObject<Item> registryObject, RegistryObject<FlowingFluid> fluidRegistryObject) {

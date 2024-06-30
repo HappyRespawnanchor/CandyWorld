@@ -565,8 +565,8 @@ public class ModBlocks {
                     .sound(ModSoundTypes.GUMMY)));
 
     // fluids
-    public static final RegistryObject<LiquidBlock> SOAP_WATER_BLOCK = BLOCKS.register("soap_water_block",
-            () -> new LiquidBlock(ModFluids.SOAP_WATER_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryObject<LiquidBlock> LIQUID_CANDY_BLOCK = BLOCKS.register("soap_water_block",
+            () -> new LiquidBlock(ModFluids.LIQUID_CANDY_BLOCK_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
 //    public static final RegistryObject<Block> LIQUID_CHOCOLATE_BLOCK = BLOCKS.register("liquid_chocolate", () ->
 //            new LiquidChocolateBlock(() -> ModFluids.LIQUID_CHOCOLATE_SOURCE.get(), BlockBehaviour
 //                    .Properties.of()

@@ -79,8 +79,8 @@ public class CandyWorld {
 	public static class ClientModEvents{
 		@SubscribeEvent
 		public static void onClientSetup(FMLClientSetupEvent event) {
-			ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAP_WATER_SOURCE.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(ModFluids.SOAP_WATER_FLOWING.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_CANDY_BLOCK_SOURCE.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_CANDY_BLOCK_FLOWING.get(), RenderType.translucent());
 		}
 	}
 }
