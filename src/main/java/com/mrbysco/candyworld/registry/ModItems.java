@@ -92,8 +92,10 @@ public final class ModItems {
 //			new BucketItem(() -> ModFluids.LIQUID_CHOCOLATE_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
 //	public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
 //			new BucketItem(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
-public static final RegistryObject<Item> LIQUID_CANDY_BLOCK_BUCKET = ITEMS.register("liquid_chocolate_bucket", () ->
-		new BucketItem(ModFluids.LIQUID_CANDY_BLOCK_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
+public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
+		new BucketItem(ModFluids.LIQUID_CANDY_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
+	public static final RegistryObject<Item> LIQUID_CHOCOLATE_BUCKET = ITEMS.register("liquid_chocolate_bucket", () ->
+			new BucketItem(ModFluids.LIQUID_CANDY_SOURCE, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));;
 //	public static final RegistryObject<Item> LIQUID_CANDY_BUCKET = ITEMS.register("liquid_candy_bucket", () ->
 //			new BucketItem(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/* .tab(ModGroups.ITEMS) */));
 }

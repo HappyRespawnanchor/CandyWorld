@@ -15,8 +15,19 @@ public class ModFluidTypes {
     public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
     public static final ResourceLocation LIQUID_CHOCOLATE_OVERLAY_RL = new ResourceLocation("msic/in_liquid_chocolate");
 
-    public static final DeferredRegister<FluidType> FLUID_TYPES =
+    public static final DeferredRegister<FluidType> FLUID_TYPES =   
             DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, CandyWorld.MOD_ID);
+
+
+    public static final RegistryObject<FluidType> LIQUID_CANDY_TYPE = register(
+            FluidType.Properties.create()
+                    .rarity(Rarity.COMMON)
+                    .lightLevel(12)
+                    .density(2000)
+                    .viscosity(3000)
+                    .temperature(1000)
+                    /*.sound(SoundAction.get("drink"),
+                            SoundEvents.HONEY_DRINK)*/);
 
     public static final RegistryObject<FluidType> LIQUID_CHOCOLATE_TYPE = register(
             FluidType.Properties.create()
