@@ -14,6 +14,7 @@ import com.mrbysco.candyworld.block.cottoncandy.CottonCandyBushBlock;
 import com.mrbysco.candyworld.block.cottoncandy.CottonCandyLeavesBlock;
 import com.mrbysco.candyworld.block.cottoncandy.CottonCandyPlantBlock;
 import com.mrbysco.candyworld.block.cottoncandy.CottonCandySaplingBlock;
+import com.mrbysco.candyworld.block.fluid.LiquidChocolateBlock;
 import com.mrbysco.candyworld.block.fluid.ModFluids;
 import com.mrbysco.candyworld.block.gummy.BaseGummyBlock;
 import com.mrbysco.candyworld.block.gummy.GummyBlock;
@@ -566,21 +567,18 @@ public class ModBlocks {
 
     // fluids
         public static final RegistryObject<LiquidBlock> LIQUID_CANDY_BLOCK = BLOCKS.register("liquid_candy_block",
-            () -> new LiquidBlock(ModFluids.LIQUID_CANDY_SOURCE, BlockBehaviour.Properties.copy(Blocks.WATER)));
+            () -> new LiquidBlock(ModFluids.LIQUID_CANDY_SOURCE, BlockBehaviour.
+                    Properties.copy(Blocks.LAVA)
+                    .noCollission()
+                    .strength(100.0F)
+                    .lightLevel((state) -> 12)
+                    .noLootTable()));
     public static final RegistryObject<LiquidBlock> LIQUID_CHOCOLATE_BLOCK = BLOCKS.register("liquid_chocolate_block",
-            () -> new LiquidBlock(ModFluids.LIQUID_CHOCOLATE_SOURCE, Properties.copy(Blocks.WATER)));;
-//    public static final RegistryObject<Block> LIQUID_CHOCOLATE_BLOCK = BLOCKS.register("liquid_chocolate", () ->
-//            new LiquidChocolateBlock(() -> ModFluids.LIQUID_CHOCOLATE_SOURCE.get(), BlockBehaviour
-//                    .Properties.of()
-//                    .noCollission()
-//                    .strength(100.0F)));
-//
-//    public static final RegistryObject<Block> LIQUID_CANDY_BLOCK = BLOCKS.register("liquid_candy", () ->
-//            new LiquidBlock(() -> ModFluids.LIQUID_CANDY_SOURCE.get(), BlockBehaviour
-//                    .Properties.of()
-//                    .noCollission()
-//                    .strength(100.0F)
-//                    .lightLevel((state) -> 12)));
+            () -> new LiquidChocolateBlock(ModFluids.LIQUID_CHOCOLATE_SOURCE, BlockBehaviour.
+                    Properties.copy(Blocks.WATER)
+                    .noCollission()
+                    .strength(100.0F)
+                    .noLootTable()));
 
     // registerBlock method
     public static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<Block> block) {

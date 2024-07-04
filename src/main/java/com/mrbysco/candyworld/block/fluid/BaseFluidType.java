@@ -33,15 +33,19 @@ public class BaseFluidType extends FluidType {
     public ResourceLocation getStillTexture() {
         return this.stillTexture;
     }
+
     public ResourceLocation getFlowingTexture() {
         return this.flowingTexture;
     }
+
     public ResourceLocation getOverlayTexture() {
         return this.overlayTexture;
     }
+
     public int getTintColor() {
         return this.tintColor;
     }
+
     public Vector3f getFogColor() {
         return this.fogColor;
     }
@@ -53,26 +57,31 @@ public class BaseFluidType extends FluidType {
             public ResourceLocation getStillTexture() {
                 return stillTexture;
             }
+
             @Override
             public ResourceLocation getFlowingTexture() {
                 return flowingTexture;
             }
+
             @Override
             public ResourceLocation getOverlayTexture() {
                 return overlayTexture;
             }
+
             @Override
             public int getTintColor() {
                 return tintColor;
             }
+
             @Override
             public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
                                                     int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
                 return fogColor;
             }
+
             @Override
             public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
-                                        float nearDistance, float farDistance, FogShape shape){
+                                        float nearDistance, float farDistance, FogShape shape) {
                 RenderSystem.setShaderFogStart(1F);
                 RenderSystem.setShaderFogEnd(6F);
             }
