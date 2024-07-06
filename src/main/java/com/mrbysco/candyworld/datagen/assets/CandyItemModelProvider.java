@@ -9,7 +9,7 @@ import com.mrbysco.candyworld.block.gummy.GummyBlock;
 import com.mrbysco.candyworld.block.gummy.GummyWormBlock;
 import com.mrbysco.candyworld.block.workbench.GummyWorkbenchBlock;
 import com.mrbysco.candyworld.registry.ModItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.SaplingBlock;
@@ -20,8 +20,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 public class CandyItemModelProvider extends ItemModelProvider {
-	public CandyItemModelProvider(DataGenerator gen, ExistingFileHelper helper) {
-		super(gen.getPackOutput(), CandyWorld.MOD_ID, helper);
+	public CandyItemModelProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, CandyWorld.MOD_ID, helper);
 	}
 
 	@Override

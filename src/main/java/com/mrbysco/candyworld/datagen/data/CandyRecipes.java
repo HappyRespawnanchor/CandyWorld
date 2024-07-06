@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.mrbysco.candyworld.registry.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -20,8 +21,8 @@ import static com.mrbysco.candyworld.registry.ModBlocks.*;
 import static com.mrbysco.candyworld.registry.ModItems.*;
 
 public class CandyRecipes extends RecipeProvider {
-	public CandyRecipes(DataGenerator gen) {
-		super(gen.getPackOutput());
+	public CandyRecipes(PackOutput output) {
+		super(output);
 	}
 
 	@Override

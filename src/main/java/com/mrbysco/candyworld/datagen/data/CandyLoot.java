@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
@@ -41,8 +42,8 @@ import static com.mrbysco.candyworld.registry.ModBlocks.*;
 import static com.mrbysco.candyworld.registry.ModItems.*;
 
 public class CandyLoot extends LootTableProvider {
-	public CandyLoot(DataGenerator gen) {
-		super(gen);
+	public CandyLoot(PackOutput output) {
+		super(output);
 	}
 
 	@Override
