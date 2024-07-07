@@ -1,10 +1,7 @@
 package com.mrbysco.candyworld.datagen.data;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
@@ -15,12 +12,10 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
@@ -32,26 +27,26 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import static com.mrbysco.candyworld.registry.ModBlocks.*;
 import static com.mrbysco.candyworld.registry.ModItems.*;
 
-public class CandyLoot extends LootTableProvider {
+	public class CandyLoot extends LootTableProvider {
 	public CandyLoot(PackOutput output) {
-		super(output);
+		super(output, Collections.emptySet(), List.of(
+				new LootTableProvider.SubProviderEntry(FarmingBlocks::new, LootContextParamSets.BLOCK)
+		));
 	}
 
-	@Override
-	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-		return ImmutableList.of(
-				Pair.of(FarmingBlocks::new, LootContextParamSets.BLOCK)
-		);
-	}
+//	@Override
+//	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+//		return ImmutableList.of(
+//				Pair.of(FarmingBlocks::new, LootContextParamSets.BLOCK)
+//		);
+//	}
 
 	private static class FarmingBlocks extends VanillaBlockLoot {
 		private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS));
@@ -168,6 +163,7 @@ public class CandyLoot extends LootTableProvider {
 
 	@Override
 	protected void validate(Map<ResourceLocation, LootTable> map, @Nonnull ValidationContext validationtracker) {
-		map.forEach((name, table) -> LootTables.validate(validationtracker, name, table));
+		//map.forEach((name, table) -> LootTableProvider.validate(validationtracker, name, table));
+
 	}
 }

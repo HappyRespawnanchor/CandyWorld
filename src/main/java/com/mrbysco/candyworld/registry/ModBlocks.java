@@ -567,8 +567,8 @@ public class ModBlocks {
 
     // fluids
         public static final RegistryObject<LiquidBlock> LIQUID_CANDY_BLOCK = BLOCKS.register("liquid_candy_block",
-            () -> new LiquidBlock(ModFluids.LIQUID_CANDY_SOURCE, BlockBehaviour.
-                    Properties.copy(Blocks.LAVA)
+            () -> new LiquidBlock(ModFluids.LIQUID_CANDY_SOURCE, BlockBehaviour
+                    .Properties.copy(Blocks.LAVA)
                     .noCollission()
                     .strength(100.0F)
                     .lightLevel((state) -> 12)
