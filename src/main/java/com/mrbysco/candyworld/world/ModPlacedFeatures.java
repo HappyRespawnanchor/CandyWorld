@@ -5,7 +5,7 @@ import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -14,16 +14,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.EnvironmentScanPlacement;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.NoiseThresholdCountPlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
-import net.minecraft.world.level.levelgen.placement.SurfaceRelativeThresholdFilter;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -31,7 +22,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class ModPlacedFeatures {
-	public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, CandyWorld.MOD_ID);
+	public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registries.PLACED_FEATURE, CandyWorld.MOD_ID);
 
 	//Candy world
 	public static final RegistryObject<PlacedFeature> ORE_MILK_BROWNIE = register("ore_milk_brownie",
@@ -168,18 +159,21 @@ public class ModPlacedFeatures {
 	private static RegistryObject<PlacedFeature> register(String registryName,
 														  Holder<? extends ConfiguredFeature<?, ?>> configuredHolder,
 														  List<PlacementModifier> placementModifiers) {
-		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature(Holder.hackyErase(configuredHolder), List.copyOf(placementModifiers)));
+		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature((Holder<ConfiguredFeature<?,?>>)(Holder<? extends ConfiguredFeature<?, ?>>)
+				configuredHolder, List.copyOf(placementModifiers)));
 	}
 
 	private static RegistryObject<PlacedFeature> register(String registryName,
 														  Holder<? extends ConfiguredFeature<?, ?>> configuredHolder,
 														  Supplier<List<PlacementModifier>> placementModifiers) {
-		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature(Holder.hackyErase(configuredHolder), List.copyOf(placementModifiers.get())));
+		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature((Holder<ConfiguredFeature<?,?>>)(Holder<? extends ConfiguredFeature<?, ?>>)
+				configuredHolder, List.copyOf(placementModifiers.get())));
 	}
 
 	private static RegistryObject<PlacedFeature> register(String registryName,
 														  Holder<? extends ConfiguredFeature<?, ?>> configuredHolder,
 														  PlacementModifier... placementModifiers) {
-		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature(Holder.hackyErase(configuredHolder), List.of(placementModifiers)));
+		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature((Holder<ConfiguredFeature<?,?>>)(Holder<? extends ConfiguredFeature<?, ?>>)
+				configuredHolder, List.of(placementModifiers)));
 	}
 }
