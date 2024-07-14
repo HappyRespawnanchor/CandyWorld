@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -175,5 +176,8 @@ public class ModPlacedFeatures {
 														  PlacementModifier... placementModifiers) {
 		return PLACED_FEATURES.register(registryName, () -> new PlacedFeature((Holder<ConfiguredFeature<?,?>>)(Holder<? extends ConfiguredFeature<?, ?>>)
 				configuredHolder, List.of(placementModifiers)));
+	}
+	public static void register(IEventBus eventBus) {
+		PLACED_FEATURES.register(eventBus);
 	}
 }

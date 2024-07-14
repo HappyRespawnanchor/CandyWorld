@@ -9,6 +9,7 @@ import com.mrbysco.candyworld.registry.ModBlocks;
 import com.mrbysco.candyworld.registry.ModEntities;
 import com.mrbysco.candyworld.registry.ModItems;
 import com.mrbysco.candyworld.world.*;
+import com.mrbysco.candyworld.world.biomemods.ModBiomeModifiers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -46,8 +47,10 @@ public class CandyWorld {
 		//ModFluids.FLUIDS.register(eventBus);
 		ModEntities.ENTITIES.register(eventBus);
 		ModBiomes.BIOMES.register(eventBus);
+		ModBiomeModifiers.BIOME_MODIFIERS.register(eventBus);
 		ModConfiguredFeatures.CONFIGURED_FEATURES.register(eventBus);
-		ModPlacedFeatures.PLACED_FEATURES.register(eventBus);
+		//ModPlacedFeatures.PLACED_FEATURES.register(eventBus);
+		ModPlacedFeatures.register(eventBus);
 		ModSurfaceRules.RULE_REGISTRY.register(eventBus);
 
 //		ModSurfaceBuilders.SURFACE_BUILDERS.register(eventBus);
