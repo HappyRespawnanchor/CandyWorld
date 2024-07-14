@@ -9,10 +9,10 @@ import com.mrbysco.candyworld.world.tree.placer.ChocolateFoliagePlacer;
 import com.mrbysco.candyworld.world.tree.placer.CottonCandyFoliagePlacer;
 import com.mrbysco.candyworld.world.tree.trunkplacers.CandyStraightTrunkPlacer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -22,12 +22,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
@@ -40,8 +35,8 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.List;
 
 public class ModConfiguredFeatures {
-	public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, CandyWorld.MOD_ID);
-
+	public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registries.CONFIGURED_FEATURE, CandyWorld.MOD_ID);
+	static RuleTest ruletest = new TagMatchTest(BlockTags.BASE_STONE_OVERWORLD);
 
 	//Candy world
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_MILK_BROWNIE = CONFIGURED_FEATURES.register("ore_milk_brownie",
@@ -64,18 +59,18 @@ public class ModConfiguredFeatures {
 
 	//Overworld
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_MILK_BROWNIE_OVERWORLD = CONFIGURED_FEATURES.register("ore_milk_brownie_overworld",
-			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, ModBlocks.MILK_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
+			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ruletest, ModBlocks.MILK_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_WHITE_BROWNIE_OVERWORLD = CONFIGURED_FEATURES.register("ore_white_brownie_overworld",
-			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, ModBlocks.WHITE_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
+			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ruletest, ModBlocks.WHITE_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
 
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_DARK_BROWNIE_OVERWORLD = CONFIGURED_FEATURES.register("ore_dark_brownie_overworld",
-			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, ModBlocks.DARK_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
+			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ruletest, ModBlocks.DARK_BROWNIE_BLOCK.get().defaultBlockState(), 25)));
 
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_SUGAR_BLOCK = CONFIGURED_FEATURES.register("ore_sugar_block",
-			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, ModBlocks.CRYSTALLIZED_SUGAR.get().defaultBlockState(), 20)));
+			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ruletest, ModBlocks.CRYSTALLIZED_SUGAR.get().defaultBlockState(), 20)));
 
 	public static RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_COOKIE = CONFIGURED_FEATURES.register("ore_cookie",
-			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, ModBlocks.COOKIE_ORE.get().defaultBlockState(), 20)));
+			() -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ruletest, ModBlocks.COOKIE_ORE.get().defaultBlockState(), 20)));
 
 	//General
 	public static final RegistryObject<ConfiguredFeature<?, ?>> GUMMY_WORM = CONFIGURED_FEATURES.register("gummy_worm",

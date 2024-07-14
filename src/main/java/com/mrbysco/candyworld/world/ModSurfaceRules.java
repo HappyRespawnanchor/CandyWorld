@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mrbysco.candyworld.CandyWorld;
 import com.mrbysco.candyworld.enums.EnumGummy;
 import com.mrbysco.candyworld.registry.ModBlocks;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 public class ModSurfaceRules extends SurfaceRules {
-	public static final DeferredRegister<Codec<? extends SurfaceRules.RuleSource>> RULE_REGISTRY = DeferredRegister.create(Registry.RULE_REGISTRY, CandyWorld.MOD_ID);
+	public static final DeferredRegister<Codec<? extends SurfaceRules.RuleSource>> RULE_REGISTRY = DeferredRegister.create(Registries.MATERIAL_RULE, CandyWorld.MOD_ID);
 
 	public static final RegistryObject<Codec<GummyBands>> GUMMY = RULE_REGISTRY.register("gummy", () -> GummyBands.CODEC);
 

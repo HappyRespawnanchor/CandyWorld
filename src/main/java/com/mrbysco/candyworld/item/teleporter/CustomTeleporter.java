@@ -2,7 +2,7 @@ package com.mrbysco.candyworld.item.teleporter;
 
 import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +24,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class CustomTeleporter implements ITeleporter {
-	private static final ResourceKey<Level> dimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("candyworld", "candy_world"));
+	private static final ResourceKey<Level> dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation("candyworld", "candy_world"));
 
 	@Nullable
 	@Override
@@ -43,7 +43,7 @@ public class CustomTeleporter implements ITeleporter {
 	@Nullable
 	private PortalInfo placeInWorld(ServerLevel destWorld, Entity entity, BlockPos pos, boolean isPlayer) {
 		boolean isToOverworld = destWorld.dimension() == Level.OVERWORLD;
-		boolean isFromCandyWorld = entity.level.dimension() == dimension && isToOverworld;
+		boolean isFromCandyWorld = entity.level().dimension() == dimension && isToOverworld;
 		BlockPos blockpos = destWorld.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, destWorld.getSharedSpawnPos());
 		if (!isFromCandyWorld) {
 			blockpos = pos.offset(0, 255, 0);
