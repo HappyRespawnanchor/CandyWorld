@@ -1,7 +1,6 @@
 package com.mrbysco.candyworld.entity.ai;
 
 import com.mrbysco.candyworld.entity.EasterChickenEntity;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 
 /**
@@ -30,7 +29,7 @@ public class EasterChickenPanicGoal extends PanicGoal {
 			return true;
 		}
 		if (creature.explodeWhenDone) {
-			this.creature.hurt(DamageSource.GENERIC, 0.0F);
+			this.creature.hurt(creature.level().damageSources().generic(), 0.0F);
 		}
 		return false;
 	}
