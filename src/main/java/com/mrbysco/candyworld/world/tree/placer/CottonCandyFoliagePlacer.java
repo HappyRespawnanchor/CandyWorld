@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import com.mrbysco.candyworld.world.ModFoliagePlacer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Blocks;
@@ -13,8 +14,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
-import java.util.Random;
-import java.util.function.BiConsumer;
 
 public class CottonCandyFoliagePlacer extends FoliagePlacer {
 	public static final Codec<CottonCandyFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> {
@@ -35,92 +34,97 @@ public class CottonCandyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(LevelSimulatedReader reader, BiConsumer<BlockPos, BlockState> biConsumer, Random random, TreeConfiguration featureConfig, int p_161426_, FoliageAttachment foliage, int p_161428_, int p_161429_, int p_161430_) {
-		BlockPos blockpos = foliage.pos();
-		BlockState leafState = featureConfig.foliageProvider.getState(random, blockpos);
-		BlockState trunkState = featureConfig.trunkProvider.getState(random, blockpos);
+	protected void createFoliage(LevelSimulatedReader pLevel, FoliagePlacer.FoliageSetter pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig, int pMaxFreeTreeHeight, FoliagePlacer.FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
+		BlockPos blockpos = pAttachment.pos();
+		BlockState leafState = pConfig.foliageProvider.getState(pRandom, blockpos);
+		BlockState trunkState = pConfig.trunkProvider.getState(pRandom, blockpos);
 
 		int currentY = -2;
 
-		placeLayer1(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer2(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer3(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer4(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer4(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer3(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer2(reader, blockpos.above(currentY++), leafState, biConsumer);
-		placeLayer1(reader, blockpos.above(currentY), leafState, biConsumer);
+		placeLayer1(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer2(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer3(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer4(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer4(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer3(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer2(pLevel, blockpos.above(currentY++), leafState, pBlockSetter);
+		placeLayer1(pLevel, blockpos.above(currentY), leafState, pBlockSetter);
 
 		for (int j2 = 0; j2 < 5; ++j2) {
 			BlockPos abovePos = blockpos.above(j2);
 
-			setLogBlock(reader, abovePos, 0, 0, 0, trunkState, biConsumer);
+			setLogBlock(pLevel, abovePos, 0, 0, 0, trunkState, pBlockSetter);
 		}
 	}
 
-	private void placeLayer1(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
+	private void placeLayer1(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, FoliageSetter pBlockSetter) {
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
-				setLeafBlock(reader, pos, x, 0, z, leafState, biConsumer);
+				setLeafBlock(reader, pos, x, 0, z, leafState, pBlockSetter);
 			}
 		}
 	}
 
-	private void placeLayer2(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
-		placeLayerSquare(reader, pos, leafState, biConsumer);
-		setAir(reader, pos, 2, 0, 2, biConsumer);
-		setAir(reader, pos, 2, 0, -2, biConsumer);
-		setAir(reader, pos, -2, 0, 2, biConsumer);
-		setAir(reader, pos, -2, 0, -2, biConsumer);
+	private void placeLayer2(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, FoliageSetter pBlockSetter) {
+		placeLayerSquare(reader, pos, leafState, pBlockSetter);
+		setAir(reader, pos, 2, 0, 2, pBlockSetter);
+		setAir(reader, pos, 2, 0, -2, pBlockSetter);
+		setAir(reader, pos, -2, 0, 2, pBlockSetter);
+		setAir(reader, pos, -2, 0, -2, pBlockSetter);
 	}
 
-	private void placeLayer3(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
-		placeLayerSquare(reader, pos, leafState, biConsumer);
-		setLeafBlock(reader, pos, 3, 0, 0, leafState, biConsumer);
-		setLeafBlock(reader, pos, -3, 0, 0, leafState, biConsumer);
-		setLeafBlock(reader, pos, 0, 0, -3, leafState, biConsumer);
-		setLeafBlock(reader, pos, 0, 0, 3, leafState, biConsumer);
+	private void placeLayer3(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, FoliageSetter pBlockSetter) {
+		placeLayerSquare(reader, pos, leafState, pBlockSetter);
+		setLeafBlock(reader, pos, 3, 0, 0, leafState, pBlockSetter);
+		setLeafBlock(reader, pos, -3, 0, 0, leafState, pBlockSetter);
+		setLeafBlock(reader, pos, 0, 0, -3, leafState, pBlockSetter);
+		setLeafBlock(reader, pos, 0, 0, 3, leafState, pBlockSetter);
 	}
 
-	private void placeLayer4(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
-		placeLayerSquare(reader, pos, leafState, biConsumer);
+	private void placeLayer4(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, FoliageSetter pBlockSetter) {
+		placeLayerSquare(reader, pos, leafState, pBlockSetter);
 		for (int i = -1; i <= 1; i++) {
-			setLeafBlock(reader, pos, i, 0, 3, leafState, biConsumer);
-			setLeafBlock(reader, pos, i, 0, -3, leafState, biConsumer);
-			setLeafBlock(reader, pos, 3, 0, i, leafState, biConsumer);
-			setLeafBlock(reader, pos, -3, 0, i, leafState, biConsumer);
+			setLeafBlock(reader, pos, i, 0, 3, leafState, pBlockSetter);
+			setLeafBlock(reader, pos, i, 0, -3, leafState, pBlockSetter);
+			setLeafBlock(reader, pos, 3, 0, i, leafState, pBlockSetter);
+			setLeafBlock(reader, pos, -3, 0, i, leafState, pBlockSetter);
 		}
 	}
 
-	private void placeLayerSquare(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
+	private void placeLayerSquare(LevelSimulatedReader reader, BlockPos pos, BlockState leafState, FoliageSetter pBlockSetter) {
 		for (int x = -2; x <= 2; x++) {
 			for (int z = -2; z <= 2; z++) {
-				this.setLeafBlock(reader, pos, x, 0, z, leafState, biConsumer);
+				this.setLeafBlock(reader, pos, x, 0, z, leafState, pBlockSetter);
 			}
 		}
 	}
 
-	private void setLeafBlock(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, BlockState leafState, BiConsumer<BlockPos, BlockState> biConsumer) {
+	private void setLeafBlock(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, BlockState leafState, FoliageSetter pBlockSetter) {
 		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 		blockpos$mutable.setWithOffset(pos, xOffset, yOffset, zOffset);
 		if (isAirOrLeaves(reader, blockpos$mutable)) {
-			biConsumer.accept(blockpos$mutable, leafState);
+			pBlockSetter.set(blockpos$mutable, leafState);
+			//biConsumer.accept(blockpos$mutable, leafState);
 		}
 	}
 
-	private void setLogBlock(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, BlockState trunkState, BiConsumer<BlockPos, BlockState> biConsumer) {
+	private void setLogBlock(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, BlockState trunkState, FoliageSetter pBlockSetter) {
 		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 		blockpos$mutable.setWithOffset(pos, xOffset, yOffset, zOffset);
 		if (isAirOrLeaves(reader, blockpos$mutable)) {
-			biConsumer.accept(blockpos$mutable, trunkState);
+			pBlockSetter.set(blockpos$mutable, trunkState);
+
+			//biConsumer.accept(blockpos$mutable, trunkState);
 		}
 	}
 
-	private void setAir(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, BiConsumer<BlockPos, BlockState> biConsumer) {
+	private void setAir(LevelSimulatedReader reader, BlockPos pos, int xOffset, int yOffset, int zOffset, FoliageSetter pBlockSetter) {
 		BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 		blockpos$mutable.setWithOffset(pos, xOffset, yOffset, zOffset);
 		if (isAirOrLeaves(reader, blockpos$mutable)) {
-			biConsumer.accept(blockpos$mutable, Blocks.AIR.defaultBlockState());
+			pBlockSetter.set(blockpos$mutable, Blocks.AIR.defaultBlockState());
+
+			//biConsumer.accept(blockpos$mutable, Blocks.AIR.defaultBlockState());
 		}
 	}
 
@@ -131,12 +135,12 @@ public class CottonCandyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int foliageHeight(Random random, int treeHeight, TreeConfiguration featureConfig) {
+	public int foliageHeight(RandomSource random, int treeHeight, TreeConfiguration featureConfig) {
 		return Math.max(4, treeHeight - this.trunkHeight.sample(random));
 	}
 
 	@Override
-	protected boolean shouldSkipLocation(Random random, int p_230373_2_, int p_230373_3_, int p_230373_4_, int p_230373_5_, boolean p_230373_6_) {
+	protected boolean shouldSkipLocation(RandomSource random, int p_230373_2_, int p_230373_3_, int p_230373_4_, int p_230373_5_, boolean p_230373_6_) {
 		return p_230373_2_ == p_230373_5_ && p_230373_4_ == p_230373_5_ && (random.nextInt(2) == 0 || p_230373_3_ == 0);
 	}
 }
