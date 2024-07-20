@@ -3,14 +3,13 @@ package com.mrbysco.candyworld.world.feature;
 import com.mojang.serialization.Codec;
 import com.mrbysco.candyworld.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-
-import java.util.Random;
 
 public class CandyCaneFeature extends Feature<RandomPatchConfiguration> {
 	public CandyCaneFeature(Codec<RandomPatchConfiguration> configCodec) {
@@ -20,7 +19,7 @@ public class CandyCaneFeature extends Feature<RandomPatchConfiguration> {
 	public boolean place(FeaturePlaceContext<RandomPatchConfiguration> placeContext) {
 		RandomPatchConfiguration clusterFeatureConfig = placeContext.config();
 		WorldGenLevel reader = placeContext.level();
-		Random random = placeContext.random();
+		RandomSource randomSource = placeContext.random();
 		ChunkGenerator generator = placeContext.chunkGenerator();
 		BlockPos blockpos = placeContext.origin();
 		int xzSpread = clusterFeatureConfig.xzSpread() + 1;
@@ -49,8 +48,8 @@ public class CandyCaneFeature extends Feature<RandomPatchConfiguration> {
 				j = 1;
 			}
 
-			blockpos$mutable.setWithOffset(blockpos, random.nextInt(xzSpread) - random.nextInt(xzSpread), -yOffset, random.nextInt(j) - random.nextInt(j));
-			if (clusterFeatureConfig.feature().value().place(reader, generator, random, blockpos$mutable)) {
+			blockpos$mutable.setWithOffset(blockpos, randomSource.nextInt(xzSpread) - randomSource.nextInt(xzSpread), -yOffset, randomSource.nextInt(j) - randomSource.nextInt(j));
+			if (clusterFeatureConfig.feature().value().place(reader, generator, randomSource, blockpos$mutable)) {
 				++i;
 			}
 		}
