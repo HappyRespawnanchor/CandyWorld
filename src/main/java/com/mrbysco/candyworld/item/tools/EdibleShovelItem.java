@@ -1,7 +1,6 @@
 package com.mrbysco.candyworld.item.tools;
 
 import com.mrbysco.candyworld.interfaces.IItemToolEdible;
-import com.mrbysco.candyworld.registry.ModGroups;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,8 +18,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class EdibleShovelItem extends ShovelItem implements IItemToolEdible {
 
-	public EdibleShovelItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
-		super(tier, attackDamageIn, attackSpeedIn, builder.tab(ModGroups.TOOLS));
+	public EdibleShovelItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
+		super(tier, attackDamageIn, attackSpeedIn, properties);
 	}
 
 	@Override

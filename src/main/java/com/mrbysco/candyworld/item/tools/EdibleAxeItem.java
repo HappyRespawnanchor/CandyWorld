@@ -1,7 +1,6 @@
 package com.mrbysco.candyworld.item.tools;
 
 import com.mrbysco.candyworld.interfaces.IItemToolEdible;
-import com.mrbysco.candyworld.registry.ModGroups;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class EdibleAxeItem extends AxeItem implements IItemToolEdible {
 
-	public EdibleAxeItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
-		super(tier, attackDamageIn, attackSpeedIn, builder.tab(ModGroups.TOOLS));
+	public EdibleAxeItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties properties) {
+		super(tier, attackDamageIn, attackSpeedIn, properties);
 	}
 
 	///////////////////////////////////////////////////////////////////////////

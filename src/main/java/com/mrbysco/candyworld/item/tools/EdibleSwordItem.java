@@ -1,7 +1,6 @@
 package com.mrbysco.candyworld.item.tools;
 
 import com.mrbysco.candyworld.interfaces.IItemToolEdible;
-import com.mrbysco.candyworld.registry.ModGroups;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class EdibleSwordItem extends SwordItem implements IItemToolEdible {
 
-	public EdibleSwordItem(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-		super(tier, attackDamageIn, attackSpeedIn, builderIn.tab(ModGroups.TOOLS));
+	public EdibleSwordItem(Tier tier, int attackDamageIn, float attackSpeedIn, Properties properties) {
+		super(tier, attackDamageIn, attackSpeedIn, properties);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
