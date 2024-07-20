@@ -32,7 +32,7 @@ public class CustomTeleporter implements ITeleporter {
 		PortalInfo pos;
 
 		pos = placeInWorld(destWorld, entity, entity.blockPosition(), entity instanceof Player);
-		pos = moveToSafeCoords(destWorld, entity, pos != null ? new BlockPos(pos.pos) : entity.blockPosition());
+		pos = moveToSafeCoords(destWorld, entity, pos != null ? BlockPos.containing(pos.pos) : entity.blockPosition());
 
 		return pos;
 	}
@@ -80,7 +80,7 @@ public class CustomTeleporter implements ITeleporter {
 					f1 = (float) Mth.wrapDegrees(Mth.atan2(vector3d1.z, vector3d1.x) * (double) (180F / (float) Math.PI) - 90.0D);
 				}
 				angle = f1;
-				blockpos = new BlockPos(vector3d.x, vector3d.y, vector3d.z);
+				blockpos = BlockPos.containing(vector3d.x, vector3d.y, vector3d.z); // new BlockPos(vector3d.x, vector3d.y, vector3d.z);
 			}
 		}
 		return new PortalInfo(new Vec3((double) blockpos.getX() + 0.5D, blockpos.getY(), (double) blockpos.getZ() + 0.5D), entity.getDeltaMovement(), angle, entity.getXRot());
